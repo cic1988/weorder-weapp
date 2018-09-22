@@ -1,0 +1,63 @@
+<!--pages/shipping-detail/shipping-detail.wxml-->
+
+<!--**
+ * Project: 点餐微信小程序
+ * Description: 实现方便点餐
+ * Author: Yuan.G
+ * Organization: Access
+ */-->
+
+<view wx:if="{{order != null}}" class="container shipping-detail">
+
+    <!-- 订单物品列表开始 -->
+    <view class="item-list">
+        <block wx:for="{{order.line_items}}" wx:key="">
+            <image src="{{item.image[0].shop_single}}"></image>
+        </block>
+    </view>
+    <!-- 订单物品列表结束 -->
+
+    <!-- 物流公司和单号开始 -->
+    <view wx:if="{{order.shipper}}" class="shipper" data-copy="{{order.shipper.code}}" bindtap="copyText">
+        <view class="shipper-icon">
+            <image src="/images/shipper-{{order.shipper.shipper_slug}}.png"></image>
+        </view>
+        <view class="shipper-detail">
+            <view class="name">
+                <text>{{order.shipper.shipper_name}}</text>
+            </view>
+            <view class="code">
+                <text>{{order.shipper.code}}</text>
+            </view>
+        </view>
+    </view>
+    <!-- 物流公司和单号结束 -->
+
+    <!-- 物流详情开始 -->
+    <view class="shipping-detail">
+        <block wx:for="{{order.shipping_detail.shipping}}" wx:key="">
+            <view class="detail-line">
+                <view class="datetime">
+                    <text class="date">{{item.date}}</text>
+                    <text class="time">{{item.time}}</text>
+                </view>
+                <view class="detail">
+                    <text>{{item.AcceptStation}}</text>
+                </view>
+            </view>
+        </block>
+        <block wx:for="{{order.shipping_detail.order}}" wx:key="">
+            <view class="detail-line">
+                <view class="datetime">
+                    <text class="date">{{item.date}}</text>
+                    <text class="time">{{item.time}}</text>
+                </view>
+                <view class="detail">
+                    <text>{{item.AcceptStation}}</text>
+                </view>
+            </view>
+        </block>
+    </view>
+    <!-- 物流详情结束 -->
+
+</view>

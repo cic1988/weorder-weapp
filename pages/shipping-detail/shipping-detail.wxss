@@ -1,0 +1,143 @@
+/* pages/shipping-detail/shipping-detail.wxss */
+
+/**
+ * Project: 点餐微信小程序
+ * Description: 实现方便点餐
+ * Author: Yuan.G
+ * Organization: Access
+ */
+
+page {
+    background-color: #f5f5f5;
+}
+
+.container {
+    padding: 15px 10px;
+}
+
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 8px;
+    position: relative;
+}
+
+.item-list::before {
+    content: "";
+    position: absolute;
+    top: -0.5px;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    border-bottom: 1px solid #ddd;
+    transform-origin: 0 0;
+    transform: scale(0.5, 0.5);
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.item-list image {
+    width: 60px;
+    height: 60px;
+    margin-right: 12px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+/* 物流公司和单号 */
+
+.shipper {
+    padding: 10px;
+    display: flex;
+}
+
+.shipper .shipper-icon image {
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+}
+
+.shipper .shipper-detail {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.shipper .code {
+    font-size: 12px;
+    color: #888;
+}
+
+/* 物流详情 */
+
+.shipping-detail {
+    overflow: visible;
+}
+
+.shipping-detail .detail-line {
+    display: flex;
+    overflow: visible;
+}
+
+.shipping-detail .detail-line .datetime {
+    width: 20%;
+    padding-right: 10px;
+    border-right: 1px solid #ccc;
+    position: relative;
+    padding: 10px;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.shipping-detail .detail-line:first-child view {
+    color: #589684;
+}
+
+.shipping-detail .detail-line .datetime .time {
+    font-size: 12px;
+    line-height: 1;
+}
+
+.shipping-detail .detail-line:first-child .datetime:before,
+.shipping-detail .detail-line:last-child .datetime:before {
+    content: " ";
+    display: block;
+    position: absolute;
+    right: -1px;
+    width: 1px;
+    height: 19px;
+    background-color: #f5f5f5;
+}
+
+.shipping-detail .detail-line:first-child .datetime:before {
+    top: 0;
+}
+
+.shipping-detail .detail-line:last-child .datetime:before {
+    bottom: 0;
+    height: 100%;
+    top: 19px;
+}
+
+.shipping-detail .detail-line:first-child .datetime:after {
+    background-color: #589684;
+}
+
+.shipping-detail .detail-line .datetime:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 19px;
+    right: -4px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+
+.shipping-detail .detail-line .detail {
+    width: 80%;
+    padding: 10px;
+}

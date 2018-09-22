@@ -1,0 +1,78 @@
+<!--templates/account-details.wxml-->
+
+<!--**
+ * Project: 点餐微信小程序
+ * Description: 实现方便点餐
+ * Author: Yuan.G
+ * Organization: Access
+ */-->
+
+<template name="account-details-bacs-china">
+    <view class="account-details">
+        <view class="detail-title">银行账户详情</view>
+        <view class="detail-description">{{order.bacs_description}}</view>
+        <view class="account-wrapper">
+            <block wx:for="{{order.account_details}}" wx:key="">
+                <view class="account">
+                    <view class="row" data-copy="{{order.order_number}}" bindtap="copyText">
+                        <view class="column-name">订单号</view>
+                        <view class="column-value">{{order.order_number}}</view>
+                    </view>
+                    <view class="row" data-copy="{{item.account_name}}" bindtap="copyText">
+                        <view class="column-name">收款户名</view>
+                        <view class="column-value">{{item.account_name}}</view>
+                    </view>
+                    <view class="row" data-copy="{{item.account_number}}" bindtap="copyText">
+                        <view class="column-name">收款账号</view>
+                        <view class="column-value">{{item.account_number}}</view>
+                    </view>
+                    <view class="row" data-copy="{{item.bank_name}}" bindtap="copyText">
+                        <view class="column-name">收款银行</view>
+                        <view class="column-value">{{item.bank_name}}</view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+</template>
+
+<template name="account-details-bacs">
+    <view class="account-details">
+        <view class="detail-title">银行账户详情</view>
+        <view class="detail-description">{{order.bacs_description}}</view>
+        <view class="account-wrapper">
+            <block wx:for="{{order.account_details}}" wx:key="">
+                <view class="account">
+                    <view class="row" data-copy="{{order.order_number}}" bindtap="copyText">
+                        <view class="column-name">订单号</view>
+                        <view class="column-value">{{order.order_number}}</view>
+                    </view>
+                    <view class="row" data-copy="{{item.account_name}}" bindtap="copyText">
+                        <view class="column-name">帐户名</view>
+                        <view class="column-value">{{item.account_name}}</view>
+                    </view>
+                    <view class="row" data-copy="{{item.bank_name}}" bindtap="copyText">
+                        <view class="column-name">银行</view>
+                        <view class="column-value">{{item.bank_name}}</view>
+                    </view>
+                    <view class="row" data-copy="{{item.account_number}}" bindtap="copyText">
+                        <view class="column-name">帐号</view>
+                        <view class="column-value">{{item.account_number}}</view>
+                    </view>
+                    <view class="row" data-copy="{{item.sort_code}}" bindtap="copyText">
+                        <view class="column-name">排序编号</view>
+                        <view class="column-value">{{item.sort_code}}</view>
+                    </view>
+                    <view class="row" data-copy="{{item.iban}}" bindtap="copyText">
+                        <view class="column-name">国际银行标准账号</view>
+                        <view class="column-value">{{item.iban}}</view>
+                    </view>
+                    <view class="row" data-copy="{{item.bic}}" bindtap="copyText">
+                        <view class="column-name">BIC</view>
+                        <view class="column-value">{{item.bic}}</view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+</template>

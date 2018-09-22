@@ -1,0 +1,64 @@
+<!--pages/coupon/coupon.wxml-->
+
+<!--**
+ * Project: 点餐微信小程序
+ * Description: 实现方便点餐
+ * Author: Yuan.G
+ * Organization: Access
+ */-->
+
+<view class="container coupon">
+
+    <!-- 输入优惠券开始 -->
+    <form bindsubmit="couponSubmit">
+        <view class="coupon">
+            <view class="coupon-input-wrapper">
+                <input class="coupon-input" type="text" name="coupon" placeholder="请输入优惠券码" confirm-type="done" placeholder-class="input-placeholder-gray" bindconfirm="couponSubmit" value="{{coupon_input}}" bindinput="couponInput"></input>
+                <button class="btn btn-primary submit-button {{! btnEnabled ? 'disabled' : ''}}" form-type="submit">
+                    <text>确定</text>
+                </button>
+            </view>
+        </view>
+    </form>
+    <!-- 输入优惠券结束 -->
+
+    <view class="coupon-list">
+        <block wx:if="{{coupons.length > 0}}">
+            <block wx:for="{{coupons}}" wx:key="">
+                <view class="coupon" data-id="{{item.code}}">
+
+                    <image src="/images/coupon-{{item.discount_type}}.png" mode="widthFix"></image>
+
+                    <view class="remove-coupon" data-id="{{item.code}}" bindtap="removeCoupon">
+                        <image src="/images/close.svg"></image>
+                    </view>
+
+                    <view class="coupon-content">
+                        <view class="coupon-value">
+                            <block wx:if="{{item.discount_type == 'percent'}}">
+                                <text class="product-price"><text>{{item.amount}}</text>
+                                <text class="currency">%</text></text>
+                            </block>
+                            <block wx:else>
+                                <text class="product-price"><text class="currency">{{currency}}</text>
+                                <text>{{item.amount}}</text></text>
+                            </block>
+                        </view>
+                        <view class="coupon-detail">
+                            <view class="coupon-description">
+                                <text>{{item.description}}</text>
+                            </view>
+                            <view wx:if="{{item.date_expires != null }}" class="coupon-expiry-date">
+                                <text>有效期至 {{item.date_expires}}</text>
+                            </view>
+                        </view>
+                    </view>
+
+                </view>
+            </block>
+        </block>
+        <block wx:elif="{{coupons != null}}">
+            <view class="no-used-coupon">暂无已使用优惠券</view>
+        </block>
+    </view>
+</view>

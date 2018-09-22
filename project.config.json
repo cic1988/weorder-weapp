@@ -1,0 +1,55 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.2.5",
+	"appid": "wxe3d56a7a9c51db8c",
+	"projectname": "diancan-1.4",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 1,
+			"list": [
+				{
+					"id": 0,
+					"name": "扫桌号",
+					"pathName": "pages/index/index",
+					"query": "scene=/7/bc678",
+					"scene": "1011"
+				},
+				{
+					"id": 1,
+					"name": "直接打开小程序",
+					"pathName": "pages/index/index",
+					"query": "scene=",
+					"scene": "1011"
+				}
+			]
+		}
+	}
+}

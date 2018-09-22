@@ -1,0 +1,29 @@
+<!--templates/login.wxml-->
+
+<!--**
+ * Project: 点餐微信小程序
+ * Description: 实现方便点餐
+ * Author: Yuan.G
+ * Organization: Access
+ */-->
+
+<template name="login">
+    <block wx:if="{{userInfo == null || userInfo == ''}}">
+        <button class="login-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+            <view class="login-inner">
+                <image class="avatar" src="/images/empty_avatar.png"></image>
+                <view class="username">
+                    <text>{{_t['请点击登录']}}</text>
+                </view>
+            </view>
+        </button>
+    </block>
+    <block wx:else>
+        <view class="login-inner">
+            <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+            <view class="username">
+                <text>{{userInfo.nickName}}</text>
+            </view>
+        </view>
+    </block>
+</template>

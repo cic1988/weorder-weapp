@@ -1,0 +1,86 @@
+<!--pages/cart/cart.wxml-->
+
+<!--**
+ * Project: 点餐微信小程序
+ * Description: 实现方便点餐
+ * Author: Yuan.G
+ * Organization: Access
+ */-->
+
+<import src="/vendor/ZanUI/stepper/index.wxml" />
+<import src="/vendor/ZanUI/toptips/index.wxml" />
+<import src="/templates/product-selected-attributes.wxml" />
+<import src="/templates/login.wxml" />
+
+<view class="container cart">
+
+    <block wx:if="{{_isLoginPopup}}">
+        <view class="need-login center">
+            <view class="login-popup">
+                <view class="login-popup-wrapper">
+                    <template is="login" data="{{userInfo: userInfo}}"></template>
+                </view>
+            </view>
+        </view>
+    </block>
+
+    <block wx:else>
+
+        <view wx:if="{{cart.cart_contents_count == 0}}" class="empty-cart center">
+            <text>{{ _t['购物车空空的'] }}</text>
+            <button class="go-shopping" bindtap="goShopping">{{ _t['随便逛逛'] }}</button>
+        </view>
+
+        <!-- 购物车列表开始 -->
+        <view wx:if="{{cart.cart_contents_count != 0}}" class="cart-list">
+            <block wx:for="{{cart.cart}}" wx:key="">
+                <view class="cart-item">
+
+                    <view class="delete-cart" data-cart-key="{{index}}" bindtap="deleteCartItem">
+                        <image src="/images/close.svg"></image>
+                    </view>
+
+                    <view class="product-image">
+                        <image src="{{item.product.images[0].shop_single}}" mode="widthFix"></image>
+                    </view>
+
+                    <view class="cart-detail">
+                        <text style="color: {{globalColor}}" class="product-title">{{item.product.name}}</text>
+                        <template wx:if="{{item.product.type == 'variation'}}" is="product-selected-attributes" data="{{selectedAttributes: item.variation, allAttributes: item.parent_attributes, selectedAllVariation: true}}" />
+                        <template is="zan-stepper" data="{{stepper: item.quantity, min: 0, componentId: index}}" />
+
+                        <view class="cart-item-price">
+                            <view class="line-subtotal">
+                                <text class="currency">{{currency}}</text>
+                                <text class="price">{{item.line_subtotal}}</text>
+                            </view>
+                        </view>
+                    </view>
+
+                </view>
+            </block>
+        </view>
+        <!-- 购物车列表结束 -->
+
+        <!-- 底栏开始 -->
+        <view wx:if="{{cart.cart_contents_count != 0 && cart != null}}" class="checkout">
+            <view class="total">
+                <view class="cart-total product-price">
+                    <text>{{ _t['合计: '] }}</text>
+                    <text style="color: {{globalColor}}" class="price"><text style="color: {{globalColor}}" class="currency">{{currency}}</text>
+                    <text>{{cart.cart_subtotal}}</text></text>
+                </view>
+                <view class="without-shipping">
+                    <text>{{ _t['不含运费'] }}</text>
+                </view>
+            </view>
+
+            <button style="background: {{globalColor}}" class="zan-btn zan-btn--large btn btn-primary checkout-btn" bindtap="goCheckout">
+                <text>{{ _t['结算'] }} ({{cart.cart_contents_count}})</text>
+            </button>
+        </view>
+        <!-- 底栏结束 -->
+    </block>
+
+    <template is="zan-toptips" data="{{ zanTopTips }}"></template>
+</view>

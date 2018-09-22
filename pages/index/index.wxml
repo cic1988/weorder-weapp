@@ -1,0 +1,75 @@
+<!--pages/index/index.wxml-->
+
+<!--**
+ * Project: 点餐微信小程序
+ * Description: 实现方便点餐
+ * Author: Yuan.G
+ * Organization: Access
+ */-->
+
+<import src="/vendor/ZanUI/toptips/index.wxml" />
+<import src="/vendor/ZanUI/noticebar/index.wxml" />
+<import src="/templates/product-list.wxml" />
+<import src="/templates/login-popup.wxml" />
+<!--<video src="{{videUrl}}"></video>-->
+
+
+<view wx:if="{{banner != null}}" class="container home">
+
+  <!-- 站点公告开始 -->
+  <template wx:if="{{notice != null}}" is="zan-noticebar" data="{{ text: notice, componentId: 'noticebar', animationData:noticebar.animationData }}"></template>
+  <!-- 站点公告结束 -->
+
+  <!-- 搜索栏开始 ->
+  <form bindsubmit="searchSubmit">
+    <view class="search">
+      <view class="search-input-wrapper">
+        <input class="search-input" type="text" name="search" placeholder="{{ _t['搜索'] }}" confirm-type="search" placeholder-class="input-placeholder" value="{{search}}" style="font-size: 14px;height: 30px;color: {{globalColor}};padding: 0px 10px;padding-right: 60px;border: 1px solid {{globalColor}};border-radius: 3px;"
+          placeholder-style="color:{{globalColor}};" bindconfirm="searchSubmit" bindinput="searchInput"></input>
+
+        <button wx:if="{{clearSearchShow}}" class="btn clear-btn" bindtap="clearSearch">
+          <image src="/images/close_white.svg"></image>
+        </button>
+        <button class="btn search-btn" form-type="submit">
+          <image src="/images/search.svg"></image>
+        </button>
+      </view>
+    </view>
+  </form>
+  <!-- 搜索栏结束 -->
+
+  <!-- Banner开始 -->
+  <swiper class="banner" indicator-dots="{{banner.length > 1 ? 'true' : false}}" circular="true" autoplay="true" interval="5000" duration="300" bindchange="imageChange" style="height:{{imgHeights[current]}}rpx;">
+    <block wx:for="{{banner}}" wx:key="">
+      <swiper-item data-url="{{item.url}}" bindtap="bannerTap">
+        <image src="{{item.image}}" class="slide-image" data-index="{{index}}" bindload="imageLoad" style="height:{{imgHeights[current]}}rpx;width:{{imgWidth}}rpx;" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- Banner结束 -->
+
+  <!-- 优惠券开始 -->
+  <!--<image src="/images/coupon0.png" style="width:130px;" mode="widthFix"></image>-->
+  <!-- 优惠券结束 -->
+
+  <!-- 精选产品开始 -->
+  <view class="center-title">
+    <text style="color:{{globalColor}}">{{ _t['精选产品'] }}</text>
+  </view>
+
+  <template is="product-list" data="{{products: featured_products, currency: currency, _t: _t, viewOnly: viewOnly, globalColor: globalColor}}"></template>
+  <!-- 精选产品结束 -->
+
+  <!-- 最新产品开始 -->
+  <view class="center-title">
+    <text style="color:{{globalColor}}">{{ _t['最新产品'] }}</text>
+  </view>
+  <template is="product-list" data="{{products: lastest_products, currency: currency, _t: _t, viewOnly: viewOnly, globalColor: globalColor}}"></template>
+  <button class="view-all" bindtap="goViewAll">
+    <text style="color:{{globalColor}}">{{ _t['查看所有产品'] }}</text>
+  </button>
+  <!-- 最新产品结束 -->
+
+  <template is="login-popup" data="{{show: isLoginPopup, userInfo: userInfo}}"></template>
+  <template is="zan-toptips" data="{{ zanTopTips }}"></template>
+</view>

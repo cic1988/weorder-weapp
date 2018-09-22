@@ -1,0 +1,23 @@
+<!--pages/about/about.wxml-->
+
+<!--**
+ * Project: 点餐微信小程序
+ * Description: 实现方便点餐
+ * Author: Yuan.G
+ * Organization: Access
+ */-->
+
+<view wx:if="{{custom != undefined}}" class="container about">
+
+	<!-- WordPress页面开始 -->
+    <block wx:if="{{custom}}">
+        <view style="padding:0 {{padding}}px">
+            <htmltowxml json="{{content}}" showLoading="{{false}}" padding="{{padding}}"></htmltowxml>
+        </view>
+    </block>
+	<!-- WordPress页面结束 -->
+
+	<!-- 默认页面开始 -->
+	<!-- 默认页面结束 -->
+
+</view>

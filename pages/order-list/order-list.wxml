@@ -1,0 +1,78 @@
+<!--pages/order-list/order-list.wxml-->
+
+<!--**
+ * Project: 点餐微信小程序
+ * Description: 实现方便点餐
+ * Author: Yuan.G
+ * Organization: Access
+ */-->
+
+<import src="/vendor/ZanUI/tab/index.wxml" />
+<import src="/vendor/ZanUI/loadmore/index.wxml" />
+<import src="/templates/order-cart-list.wxml" />
+
+<view class="container order-list">
+
+    <template is="zan-tab" data="{{ tab: { list: tabList, selectedId: tabSelected, scroll: true, height: 0, color: globalColor}, componentId: 'order-tab' }}"></template>
+
+    <view class="tab-content-wrapper">
+
+        <view wx:if="{{bottomStyle == 'empty'}}" class="empty-order center">
+            <text>{{ _t['还没有相关订单'] }}</text>
+        </view>
+        <block wx:for="{{orders}}" wx:key="">
+            <view class="order">
+
+                <view class="order-main" data-id="{{item.id}}" bindtap="goOrderDetail">
+
+                    <view class="order-header">
+                        <text class="order-number">{{item.date_created}}</text>
+                        <text style="color: {{globalColor}}" class="order-status">{{_t[item.order_status_desc]}}</text>
+                    </view>
+
+                    <template is="order-cart-list" data="{{line_items: item.line_items, currency: currency, globalColor: globalColor}}"></template>
+
+                    <!-- 价格详情开始 -->
+                    <view class="order-price">
+                        <view>
+                            <text>{{item.line_items_count}} {{ _t['件商品'] }}</text>
+                        </view>
+                        <view>
+                            <text>{{ _t['合计'] }}</text>
+                            <text class="currency">{{currency}}</text>
+                            <text>{{item.total}}</text>
+                        </view>
+                        <view>
+                            <text>{{ _t['运费'] }}</text>
+                            <text class="currency">{{currency}}</text>
+                            <text>{{item.shipping_total}}</text>
+                        </view>
+                    </view>
+                    <!-- 价格详情结束 -->
+
+                </view>
+
+                <!-- 操作按钮开始 -->
+                <view class="actions-button">
+                    <block>
+                        <button class="btn" open-type="contact" show-message-card="true" session-from="shop-order-list" send-message-title="商城订单 - {{item.id}}">{{ _t['联系我们'] }}</button>
+                    </block>
+                    <block wx:if="{{item.status == 'pending' || item.status == 'on-hold'}}">
+                        <button class="btn" data-id="{{item.id}}" bindtap="cancelOrder">取消订单</button>
+                    </block>
+                    <block wx:if="{{item.status == 'pending'}}">
+                        <button class="btn btn-primary" data-id="{{item.id}}" bindtap="makePayment">立即付款</button>
+                    </block>
+                    <block wx:if="{{item.status == 'shipped' || item.status == 'received'}}">
+                        <button class="btn" data-id="{{item.id}}" bindtap="goShippingDetail">查看物流</button>
+                    </block>
+                </view>
+                <!-- 操作按钮结束 -->
+
+            </view>
+        </block>
+
+        <template wx:if="{{bottomStyle == 'nomore'}}" is="zan-loadmore" data="{{nomore:true}}"></template>
+    </view>
+
+</view>

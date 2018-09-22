@@ -1,0 +1,5 @@
+{
+	"usingComponents": {
+		"ui-slider": "/components/slider/dist/index"
+	}
+}

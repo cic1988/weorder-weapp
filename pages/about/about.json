@@ -1,0 +1,6 @@
+{
+	"navigationBarTitleText": "关于 点餐微信小程序",
+	"usingComponents": {
+		"htmltowxml": "/vendor/html2wxml/html2wxml"
+	}
+}

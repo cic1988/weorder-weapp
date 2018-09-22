@@ -1,0 +1,25 @@
+<!--templates/product-list.wxml-->
+
+<!--**
+ * Project: 点餐微信小程序
+ * Description: 实现方便点餐
+ * Author: Yuan.G
+ * Organization: Access
+ */-->
+
+<import src="product-gird.wxml" />
+
+<template name="product-list">
+    <view class="product-list">
+        <view class="column">
+            <block wx:for="{{products}}" wx:if="{{index % 2 == 0 }}" wx:key="product">
+                <template is="product-gird" data="{{index, item, inEdit, selectedProducts, currency, _t, viewOnly, globalColor}}"></template>
+            </block>
+        </view>
+        <view class="column">
+            <block wx:for="{{products}}" wx:if="{{index % 2 != 0 }}" wx:key="product">
+                <template is="product-gird" data="{{index, item, inEdit, selectedProducts, currency, _t, viewOnly, globalColor}}"></template>
+            </block>
+        </view>
+    </view>
+</template>
